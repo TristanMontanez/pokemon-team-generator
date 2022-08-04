@@ -9,8 +9,14 @@
         <link rel="styl esheet" href="">
         
         <style>
+            img {
+                height: 90px;
+            }
             table, th, td {
                 border: 1px solid black;
+            }
+            .content {
+                width: 500px;
             }
             .table {
                 width: 500px;
@@ -18,63 +24,97 @@
             .pic-cell {
                 text-align: center;
             }
+            .big-btn {
+                display: block;
+                width: 100%;
+                border: none;
+                background-color: #04AA6D;
+                padding: 14px 28px;
+                font-size: 16px;
+                cursor: pointer;
+                text-align: center;
+              }
 
         </style>
     </head>
     <body>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Pokemon</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                </tr>
-            </thead>
-            <tr>
-                <td id="pic0" class="pic-cell" id="pic1">
-                    <img src="{{ team.0.picture }}" alt="{{ team.0.name }}">
-                </td>
-                <td id="name0">{{ team.0.name }}</td>
+        <div class="content">
 
-                <td id="type0">{{ team.0.type }}</td>
-            </tr>
-            <tr>
-                <td id="pic1" class="pic-cell">
-                    <img src="{{ team.1.picture }}" alt="{{ team.1.name }}">
-                </td>
-                <td id="name1">{{ team.1.name }}</td>
-                <td id="type1">{{ team.1.type }}</td>
-            </tr>
-            <tr>
-                <td id="pic2" class="pic-cell">
-                    <img src="{{ team.2.picture }}" alt="{{ team.2.name }}">
-                </td>
-                <td id="name2">{{ team.2.name }}</td>
-                <td id="type2">{{ team.2.type }}</td>
-            </tr>
-            <tr>
-                <td id="pic3" class="pic-cell">
-                    <img src="{{ team.3.picture }}" alt="{{ team.0.name }}">
-                </td>
-                <td id="name3">{{ team.3.name }}</td>
-                <td id="type3">{{ team.3.type }}</td>
-            </tr>
-            <tr>
-                <td id="pic4" class="pic-cell">
-                    <img src="{{ team.4.picture }}" alt="{{ team.4.name }}">
-                </td>
-                <td id="name4">{{ team.4.name }}</td>
-                <td id="type4">{{ team.4.type }}</td>
-            </tr>
-            <tr>
-                <td id="pic5" class="pic-cell">
-                    <img src="{{ team.5.picture }}" alt="{{ team.5.name }}">
-                </td>
-                <td id="name5">{{ team.5.name }}</td>
-                <td id="type5">{{ team.5.type }}</td>
-            </tr>
-        </table>
-    
+            <button class="big-btn" type="submit" onClick="generateTeam()">GENERATE NEW TEAM!</button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style='width: 230px'>Pokemon</th>
+                        <th style='width: 230px'>Name</th>
+                        <th style='width: 230px'>Type</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td class="pic-cell">
+                        <img id="pic0" src="" alt="">
+                    </td>
+                    <td id="name0"></td>
+                    <td id="type0"></td>
+                </tr>
+                <tr>
+                    <td class="pic-cell">
+                        <img id="pic1" src="" alt="">
+                    </td>
+                    <td id="name1"></td>
+                    <td id="type1"></td>
+                </tr>
+                <tr>
+                    <td class="pic-cell">
+                        <img id="pic2" src="" alt="">
+                    </td>
+                    <td id="name2"></td>
+                    <td id="type2"></td>
+                </tr>
+                <tr>
+                    <td class="pic-cell">
+                        <img id="pic3" src="" alt="">
+                    </td>
+                    <td id="name3"></td>
+                    <td id="type3"></td>
+                </tr>
+                <tr>
+                    <td class="pic-cell">
+                        <img id="pic4" src="" alt="">
+                    </td>
+                    <td id="name4"></td>
+                    <td id="type4"></td>
+                </tr>
+                <tr>
+                    <td class="pic-cell">
+                        <img id="pic5" src="" alt="">
+                    </td>
+                    <td id="name5"></td>    
+                    <td id="type5"></td>
+                </tr>
+            </table>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            function generateTeam() {
+                $.ajax({
+                    url: '/generate',
+                    type: 'GET',
+                    success: function(response){
+                        renderTeam(response)
+                    }
+                })
+            };
+            
+            function renderTeam(team) {
+                for (let i = 0; i < team.length; i++) {
+                    $("#pic"+i).attr("src", team[i].picture);
+                    $("#pic"+i).attr("alt", team[i].name);
+                    $("#name"+i).html(team[i].name);
+                    console.log(team[i].type)
+                }
+            };
+
+            
+        </script>
     </body>
 </html>
