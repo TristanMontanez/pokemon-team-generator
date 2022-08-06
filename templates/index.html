@@ -40,7 +40,7 @@
     <body>
         <div class="content">
 
-            <button class="big-btn" type="submit" onClick="generateTeam()">GENERATE NEW TEAM!</button>
+            <button class="big-btn" onClick="generateTeam()">GENERATE NEW TEAM!</button>
             <table class="table" hidden>
                 <thead>
                     <tr>
@@ -106,23 +106,33 @@
                     <td><button id="reroll5">Reroll</button></td>
                 </tr>
             </table>
+            <div id="saveButtonDiv" hidden>
+                <button class="big-btn" onclick="saveTeam()">Save Team</button>
+                <button class="big-btn" onclick="deleteTeam()">Delete Team</button>
+            </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
             var rerollCount = [2, 2, 2, 2, 2, 2]
+            const savedTeam = {{ saved_team | safe }}
+
+            if ( savedTeam.length > 0 ) {
+                renderTeam(savedTeam)
+            }
 
             function generateTeam() {
                 $.ajax({
                     url: '/generate',
                     type: 'GET',
                     success: function(response){
-                        $(".table").attr("hidden", false)
-                        renderTeam(response)
+                        renderTeam(response);
                     }
                 })
             };
             
             function renderTeam(team) {
+                $(".table").attr("hidden", false);
+                $("#saveButtonDiv").attr("hidden", false);
                 for (let i = 0; i < team.length; i++) {
                     $("#pic"+i).attr("src", "/");
                     $("#pic"+i).attr("alt", team[i].name);
@@ -137,16 +147,45 @@
                 }
             };
 
+            function getAllIds() {
+                id_array = []
+                for (let i = 0; i < 6; i++) {
+                    id_array.push($("#pokemon_id"+i).html())
+                }
+                return id_array
+            }
+
+            function saveTeam() {
+                id_array = getAllIds()
+                $.ajax({
+                    url: "/save",
+                    type: "POST",
+                    data: JSON.stringify({"ids": id_array}),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        alert("Saved Pokemon Team")
+                    }
+                })
+
+            }
+
+            function deleteTeam() {
+                $.ajax({
+                    url: "/delete",
+                    type: "DELETE",
+                    success: function(response) {
+                        window.location.reload();
+                    }
+                })
+            }
+
             $("button[id^='reroll']").click(function() {
                 index = this.id[6]
                 rerollCount[index]--
                 if (rerollCount[index] == 0) {
                     $(this).hide()
                 }
-                id_array = []
-                for (let i = 0; i < 6; i++) {
-                    id_array.push($("#pokemon_id"+i).html())
-                }
+                id_array = getAllIds()
 
                 pokemon_data = {
                     "ids": id_array,

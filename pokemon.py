@@ -37,7 +37,6 @@ def add_pokemon(id, name, types, picture):
     cur.connection.commit() 
     cur.close()
 
-
 def get_pokemon_team(pokemon_ids: List[int]):
     pokemon_dict_list = []
     for id in pokemon_ids:
@@ -78,9 +77,23 @@ def get_random_team():
         pokemon_dict_list.append(pokemon_dict)
     return pokemon_dict_list
 
+def get_saved_team():
+    # data = request.json
+
+    cur = get_db().execute(
+        f'SELECT pokemon_id FROM saved_pokemon'
+    )
+    pokemon_team = cur.fetchall()
+    pokemon_ids = []
+    for id in pokemon_team:
+        pokemon_ids.append(id[0])
+
+    return pokemon_ids
+
 @app.route('/')
 def hello_world():
-    return render_template('index.html')
+    context = {'saved_team': get_pokemon_team(get_saved_team())}
+    return render_template('index.html', **context)
 
 @app.route('/generate')
 def generate():
@@ -105,7 +118,26 @@ def reroll_pokemon():
 
     return response
 
-@app.route('/team_info', methods=['POST'])
-def team_info():
-    data = request.json
+@app.route('/save', methods=['POST'])
+def save_pokemon():
+    pokemon_ids = request.json.get('ids')
+    cur = get_db().execute(
+        f'DELETE FROM saved_pokemon'
+    )
+    for id in pokemon_ids:
+        id = int(id)
+        cur = get_db().execute(
+            f'INSERT INTO saved_pokemon (pokemon_id) VALUES ({id})'
+        )
+        cur.connection.commit()
+    cur.close()
+    return {}
+
+@app.route('/delete', methods=['DELETE'])
+def delete_team():
+    cur = get_db().execute(
+        f'DELETE FROM saved_pokemon'
+    )
+    cur.connection.commit()
+    cur.close()
     return {}
