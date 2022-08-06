@@ -45,56 +45,72 @@
                 <thead>
                     <tr>
                         <th style='width: 230px'>Pokemon</th>
+                        <th style='width: 50px'>ID</th>
                         <th style='width: 230px'>Name</th>
                         <th style='width: 230px'>Type</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tr>
                     <td class="pic-cell">
                         <img id="pic0" src="" alt="">
                     </td>
+                    <td id="pokemon_id0"></td>
                     <td id="name0"></td>
                     <td id="type0"></td>
+                    <td><button id="reroll0">Reroll</button></td>
                 </tr>
                 <tr>
                     <td class="pic-cell">
                         <img id="pic1" src="" alt="">
                     </td>
+                    <td id="pokemon_id1"></td>
                     <td id="name1"></td>
                     <td id="type1"></td>
+                    <td><button id="reroll1">Reroll</button></td>
                 </tr>
                 <tr>
                     <td class="pic-cell">
                         <img id="pic2" src="" alt="">
                     </td>
+                    <td id="pokemon_id2"></td>
                     <td id="name2"></td>
                     <td id="type2"></td>
+                    <td><button id="reroll2">Reroll</button></td>
                 </tr>
                 <tr>
                     <td class="pic-cell">
                         <img id="pic3" src="" alt="">
                     </td>
+                    <td id="pokemon_id3"></td>
                     <td id="name3"></td>
                     <td id="type3"></td>
+                    <td><button id="reroll3">Reroll</button></td>
                 </tr>
                 <tr>
                     <td class="pic-cell">
                         <img id="pic4" src="" alt="">
                     </td>
+                    <td id="pokemon_id4"></td>
                     <td id="name4"></td>
                     <td id="type4"></td>
+                    <td><button id="reroll4">Reroll</button></td>
                 </tr>
                 <tr>
                     <td class="pic-cell">
                         <img id="pic5" src="" alt="">
                     </td>
+                    <td id="pokemon_id5"></td>
                     <td id="name5"></td>    
                     <td id="type5"></td>
+                    <td><button id="reroll5">Reroll</button></td>
                 </tr>
             </table>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
+            
+
             function generateTeam() {
                 $.ajax({
                     url: '/generate',
@@ -107,13 +123,49 @@
             
             function renderTeam(team) {
                 for (let i = 0; i < team.length; i++) {
-                    $("#pic"+i).attr("src", team[i].picture);
+                    $("#pic"+i).attr("src", "/");
                     $("#pic"+i).attr("alt", team[i].name);
+                    $("#pokemon_id"+i).html(team[i].id);
                     $("#name"+i).html(team[i].name);
-                    console.log(team[i].type)
+                    
+                    $("#type"+i).empty()
+                    $("#type"+i).append(team[i].type[0])
+                    for (let j=1; j < team[i].type.length; j++) {
+                        $("#type"+i).append(", " + team[i].type[j])
+                    }
                 }
             };
 
+            $("button[id^='reroll']").click(function() {
+                index = this.id[6]
+                id_array = []
+                for (let i = 0; i < 6; i++) {
+                    id_array.push($("#pokemon_id"+i).html())
+                }
+
+                pokemon_data = {
+                    "ids": id_array,
+                    "replace": index
+                }
+
+                $.ajax({
+                    url: "/reroll",
+                    type: "POST",
+                    data: JSON.stringify(pokemon_data),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        $("#pic"+index).attr("alt", response.name);
+                        $("#pokemon_id"+index).html(response.id);
+                        $("#name"+index).html(response.name);
+                        
+                        $("#type"+index).empty()
+                        $("#type"+index).append(response.type[0])
+                        for (let j=1; j < response.type.length; j++) {
+                            $("#type"+index).append(", " + response.type[j])
+                        }
+                    }
+                })
+            })
             
         </script>
     </body>
