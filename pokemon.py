@@ -1,4 +1,4 @@
-from dataclasses import replace
+from typing import List
 import json
 import sqlite3
 
@@ -25,7 +25,6 @@ def add_pokemon(id, name, types, picture):
     if ";" in name:
         raise ValueError
     
-
     cur = get_db().execute(
         f'INSERT INTO pokemon (id, name, picture) VALUES ({id}, "{name}", "{picture}");'
     )
@@ -38,6 +37,19 @@ def add_pokemon(id, name, types, picture):
     cur.connection.commit() 
     cur.close()
 
+
+def get_pokemon_team(pokemon_ids: List[int]):
+    pokemon_dict_list = []
+    for id in pokemon_ids:
+        id = int(id)
+            
+        cur = get_db().execute(
+            f'SELECT id, name, picture FROM pokemon WHERE id={id};'
+        )
+        pokemon = dict(zip(POKEMON_COLUMNS, cur.fetchall()[0]))
+        pokemon['type'] = get_pokemon_types(id)
+        pokemon_dict_list.append(pokemon)
+    return pokemon_dict_list
 
 def get_pokemon_types(pokemon_id: int):
     cur = get_db().execute(
@@ -52,7 +64,7 @@ def get_pokemon_types(pokemon_id: int):
 
     return type_list
 
-def get_pokemon_team():
+def get_random_team():
     cur = get_db().execute(
         'SELECT id, name, picture FROM pokemon ORDER BY RANDOM() LIMIT 6;'
     )
@@ -61,27 +73,23 @@ def get_pokemon_team():
 
     pokemon_dict_list = []
     for pokemon in pokemon_list:
-        pokemon_dict_list.append(dict(zip(POKEMON_COLUMNS, pokemon)))
+        pokemon_dict = dict(zip(POKEMON_COLUMNS, pokemon))
+        pokemon_dict['type'] = get_pokemon_types(pokemon_dict['id'])
+        pokemon_dict_list.append(pokemon_dict)
     return pokemon_dict_list
 
 @app.route('/')
 def hello_world():
-    team = get_pokemon_team()
-    context = {'team': team}
-    return render_template('index.html', **context)
+    return render_template('index.html')
 
 @app.route('/generate')
 def generate():
-    team = get_pokemon_team()
-
-    for pokemon in team:
-        pokemon['type'] = get_pokemon_types(pokemon['id'])
-
-    return team
+    return get_random_team()
 
 @app.route('/reroll', methods=['POST'])
 def reroll_pokemon():
     data = request.json
+    get_pokemon_team(data.get('ids'))
     replaced_id = data.get('ids').pop(int(data.get('replace')))
     replacement_id = replaced_id
     while(replaced_id == replacement_id):
@@ -96,3 +104,8 @@ def reroll_pokemon():
     response['type'] = get_pokemon_types(replacement_id)
 
     return response
+
+@app.route('/team_info', methods=['POST'])
+def team_info():
+    data = request.json
+    return {}
