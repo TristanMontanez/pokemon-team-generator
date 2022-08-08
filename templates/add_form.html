@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="styl esheet" href="">
+        
+        <style>
+            table, th, td {
+                border: 1px solid black;
+            }
+            .content {
+                width: 500px;
+            }
+            .table {
+                width: 500px;
+            }
+            .big-btn {
+                display: block;
+                width: 100%;
+                border: none;
+                background-color: #04AA6D;
+                padding: 14px 28px;
+                font-size: 16px;
+                cursor: pointer;
+                text-align: center;
+            }
+            input {
+                width: 95%;
+            }
+            select {
+                width: 70%;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <td><input id="pokemon_id"></td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td><input id="pokemon_name"></td>
+                </tr>
+                <tr>
+                    <th>Primary Type</th>
+                    <td>
+                        <select id="primary_type">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Secondary Type</th>
+                    <td>
+                        <select id="secondary_type">
+                            <option disabled selected> - </option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <div id="saveButtonDiv">
+                <button class="big-btn" onclick="savePokemon()">Save Pokemon</button>
+                <a href="/"><button class="big-btn">Cancel</button></a>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+            types = {{ types | safe }}
+            $.each(types, function(i, type){
+                $("#primary_type").append($("<option>", {
+                    value: i,
+                    text: type,
+                    id: "primary_" + type
+                }));
+                $("#secondary_type").append($("<option>", {
+                    value: i,
+                    text: type,
+                    id: "secondary_" + type
+                }));
+            });
+
+            function savePokemon() {
+                pokemon_data = {
+                    "id": $("#pokemon_id").val(),
+                    "name": $("#pokemon_name").val(),
+                    "primary": $("#primary_type option:selected").val(),
+                    "secondary": $("#secondary_type option:selected ").val()
+                }
+                console.log(pokemon_data)
+                $.ajax({
+                    url: "/add",
+                    type: "POST",
+                    data: JSON.stringify(pokemon_data),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        alert("Added Pokemon")
+                    }
+                })
+            }
+            
+
+        </script>
+    </body>
+</html>

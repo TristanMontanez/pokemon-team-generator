@@ -1,8 +1,10 @@
+from re import L, T
+import types
 from typing import List
 import json
 import sqlite3
 
-from flask import Flask, render_template, g, request
+from flask import Flask, render_template, g, request, send_from_directory
 
 
 app = Flask(__name__)
@@ -21,7 +23,7 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-def add_pokemon(id, name, types, picture):
+def add_pokemon(id, name, types, picture=""):
     if ";" in name:
         raise ValueError
     
@@ -78,7 +80,6 @@ def get_random_team():
     return pokemon_dict_list
 
 def get_saved_team():
-    # data = request.json
 
     cur = get_db().execute(
         f'SELECT pokemon_id FROM saved_pokemon'
@@ -91,16 +92,16 @@ def get_saved_team():
     return pokemon_ids
 
 @app.route('/')
-def hello_world():
+def home_view():
     context = {'saved_team': get_pokemon_team(get_saved_team())}
     return render_template('index.html', **context)
 
 @app.route('/generate')
-def generate():
+def generate_view():
     return get_random_team()
 
 @app.route('/reroll', methods=['POST'])
-def reroll_pokemon():
+def reroll_pokemon_view():
     data = request.json
     get_pokemon_team(data.get('ids'))
     replaced_id = data.get('ids').pop(int(data.get('replace')))
@@ -119,7 +120,7 @@ def reroll_pokemon():
     return response
 
 @app.route('/save', methods=['POST'])
-def save_pokemon():
+def save_pokemon_view():
     pokemon_ids = request.json.get('ids')
     cur = get_db().execute(
         f'DELETE FROM saved_pokemon'
@@ -133,11 +134,39 @@ def save_pokemon():
     cur.close()
     return {}
 
+@app.route('/add-pokemon')
+def add_pokemon_view():
+    cur = get_db().execute(
+        'SELECT id, name FROM type'
+    )
+    type_list = []
+    for pokemon_type in cur.fetchall():
+        type_list.append(pokemon_type)
+    context = {"types": type_list}
+    return render_template('add_form.html', **context)
+
+@app.route('/add', methods=["POST"])
+def confirm_add_pokemon():
+    pokemon = request.json
+    pokemon_types = [pokemon.pop('primary')]
+    secondary = pokemon.pop('secondary')
+    if secondary != '-':
+        pokemon_types.append(secondary)
+    pokemon['types'] = pokemon_types
+    add_pokemon(**pokemon)
+    return {}
+
 @app.route('/delete', methods=['DELETE'])
-def delete_team():
+def delete_team_view():
     cur = get_db().execute(
         f'DELETE FROM saved_pokemon'
     )
     cur.connection.commit()
     cur.close()
     return {}
+
+@app.route('/export')
+def export_team_view():
+    pokemon_team = get_pokemon_team(get_saved_team())
+
+    return {"pokemon_team": pokemon_team}
