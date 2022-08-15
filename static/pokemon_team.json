@@ -1,0 +1,51 @@
+[
+    {
+        "id": 495,
+        "name": "Snivy",
+        "picture": "https://static.wikia.nocookie.net/nintendo/images/9/9a/Snivy.png/revision/latest/scale-to-width-down/120?cb=20121029215821&path-prefix=en",
+        "type": [
+            "GRASS"
+        ]
+    },
+    {
+        "id": 25,
+        "name": "Pikachu",
+        "picture": "https://static.wikia.nocookie.net/nintendo/images/7/77/Pikachu.png/revision/latest/scale-to-width-down/120?cb=20141002082401&path-prefix=en",
+        "type": [
+            "ELECTRIC"
+        ]
+    },
+    {
+        "id": 255,
+        "name": "Torchic",
+        "picture": "https://static.wikia.nocookie.net/nintendo/images/4/4f/Torchic.png/revision/latest/scale-to-width-down/120?cb=20210924130727&path-prefix=en",
+        "type": [
+            "FIRE"
+        ]
+    },
+    {
+        "id": 158,
+        "name": "Totodile",
+        "picture": "https://static.wikia.nocookie.net/nintendo/images/e/e7/Totodile.png/revision/latest/scale-to-width-down/120?cb=20141003061824&path-prefix=en",
+        "type": [
+            "WATER"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "IVYSAUR",
+        "picture": "",
+        "type": [
+            "GRASS",
+            "POISON"
+        ]
+    },
+    {
+        "id": 393,
+        "name": "Piplup",
+        "picture": "https://static.wikia.nocookie.net/nintendo/images/1/11/Piplup.png/revision/latest/scale-to-width-down/120?cb=20121110152950&path-prefix=en",
+        "type": [
+            "WATER"
+        ]
+    }
+]

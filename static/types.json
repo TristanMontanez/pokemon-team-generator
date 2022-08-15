@@ -1,0 +1,19 @@
+{
+    "NORMAL": "https://archives.bulbagarden.net/media/upload/f/f6/NormalIC_LA.png",
+    "FIRE": "https://archives.bulbagarden.net/media/upload/b/b1/FireIC_BDSP.png",
+    "WATER": "https://archives.bulbagarden.net/media/upload/2/2b/WaterIC_BDSP.png",
+    "GRASS": "https://archives.bulbagarden.net/media/upload/a/ad/GrassIC_BDSP.png",
+    "ELECTRIC": "https://archives.bulbagarden.net/media/upload/c/c1/ElectricIC_BDSP.png",
+    "ICE": "https://archives.bulbagarden.net/media/upload/1/11/IceIC_BDSP.png",
+    "FIGHTING": "https://archives.bulbagarden.net/media/upload/3/35/FightingIC_BDSP.png",
+    "POISON": "https://archives.bulbagarden.net/media/upload/3/3a/PoisonIC_LA.png",
+    "GROUND": "https://archives.bulbagarden.net/media/upload/b/bd/GroundIC_BDSP.png",
+    "FLYING": "https://archives.bulbagarden.net/media/upload/3/35/FlyingIC_LA.png",
+    "PSYCHIC": "https://archives.bulbagarden.net/media/upload/6/68/PsychicIC_BDSP.png",
+    "BUG": "https://archives.bulbagarden.net/media/upload/b/bd/BugIC.png",
+    "ROCK": "https://archives.bulbagarden.net/media/upload/e/eb/RockIC_LA.png",
+    "GHOST": "https://archives.bulbagarden.net/media/upload/4/45/GhostIC_BDSP.png",
+    "DARK": "https://archives.bulbagarden.net/media/upload/b/b9/DarkIC_BDSP.png",
+    "DRAGON": "https://archives.bulbagarden.net/media/upload/c/c7/DragonIC_BDSP.png",
+    "FAIRY": "https://archives.bulbagarden.net/media/upload/d/d6/FairyIC_BDSP.png"
+}

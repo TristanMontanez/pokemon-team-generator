@@ -1,0 +1,29 @@
+{
+    "pokemon": [
+        {"id": 1, "name": "Bulbasaur", "types": [3, 7], "picture": "https://static.wikia.nocookie.net/nintendo/images/4/43/Bulbasaur.png/revision/latest/scale-to-width-down/120?cb=20141002083518&path-prefix=en"},
+        {"id": 4, "name": "Charmander", "types": [1], "picture": "https://static.wikia.nocookie.net/nintendo/images/5/56/Charmander.png/revision/latest/scale-to-width-down/120?cb=20141002083351&path-prefix=en"},
+		{"id": 7, "name": "Squirtle", "types": [2], "picture": "https://static.wikia.nocookie.net/nintendo/images/e/e3/Squirtle.png/revision/latest/scale-to-width-down/120?cb=20141002083243&path-prefix=en"},
+		{"id": 25, "name": "Pikachu", "types": [4], "picture": "https://static.wikia.nocookie.net/nintendo/images/7/77/Pikachu.png/revision/latest/scale-to-width-down/120?cb=20141002082401&path-prefix=en"},
+		{"id": 152, "name": "Chikorita", "types": [3], "picture": "https://static.wikia.nocookie.net/nintendo/images/4/4e/Chikorita.png/revision/latest/scale-to-width-down/120?cb=20141003061237&path-prefix=en"},
+		{"id": 155, "name": "Cyndaquil", "types": [1], "picture": "https://static.wikia.nocookie.net/nintendo/images/9/99/Cyndaquil.png/revision/latest/scale-to-width-down/120?cb=20210813021853&path-prefix=en"},
+		{"id": 158, "name": "Totodile", "types": [2], "picture": "https://static.wikia.nocookie.net/nintendo/images/e/e7/Totodile.png/revision/latest/scale-to-width-down/120?cb=20141003061824&path-prefix=en"},
+		{"id": 252, "name": "Treecko", "types": [3], "picture": "https://static.wikia.nocookie.net/nintendo/images/b/b8/Treecko.png/revision/latest/scale-to-width-down/120?cb=20210924130122&path-prefix=en"},
+		{"id": 255, "name": "Torchic", "types": [1], "picture": "https://static.wikia.nocookie.net/nintendo/images/4/4f/Torchic.png/revision/latest/scale-to-width-down/120?cb=20210924130727&path-prefix=en"},
+		{"id": 258, "name": "Mudkip", "types": [2], "picture": "https://static.wikia.nocookie.net/nintendo/images/a/ae/Mudkip.png/revision/latest/scale-to-width-down/120?cb=20210924131318&path-prefix=en"},
+		{"id": 387, "name": "Turtwig", "types": [3], "picture": "https://static.wikia.nocookie.net/nintendo/images/c/c8/Turtwig.png/revision/latest/scale-to-width-down/120?cb=20121110152512&path-prefix=en"},
+		{"id": 390, "name": "Chimchar", "types": [1], "picture": "https://static.wikia.nocookie.net/nintendo/images/7/76/390Chimchar.png/revision/latest/scale-to-width-down/120?cb=20210911023011&path-prefix=en"},
+		{"id": 393, "name": "Piplup", "types": [2], "picture": "https://static.wikia.nocookie.net/nintendo/images/1/11/Piplup.png/revision/latest/scale-to-width-down/120?cb=20121110152950&path-prefix=en"},
+		{"id": 495, "name": "Snivy", "types": [3], "picture": "https://static.wikia.nocookie.net/nintendo/images/9/9a/Snivy.png/revision/latest/scale-to-width-down/120?cb=20121029215821&path-prefix=en"},
+		{"id": 498, "name": "Tepig", "types": [1], "picture": "https://static.wikia.nocookie.net/nintendo/images/0/0e/Tepig.png/revision/latest/scale-to-width-down/120?cb=20100514153809&path-prefix=en"},
+		{"id": 501, "name": "Oshawott", "types": [2], "picture": "https://static.wikia.nocookie.net/nintendo/images/e/e1/Oshawott.png/revision/latest/scale-to-width-down/120?cb=20100514154046&path-prefix=en"},
+		{"id": 650, "name": "Chespin", "types": [3], "picture": "https://static.wikia.nocookie.net/nintendo/images/4/46/Chespin.png/revision/latest/scale-to-width-down/120?cb=20130108210617&path-prefix=en"},
+		{"id": 653, "name": "Fennekin", "types": [1], "picture": "https://static.wikia.nocookie.net/nintendo/images/1/11/Fennekin.png/revision/latest/scale-to-width-down/120?cb=20130116015215&path-prefix=en"},
+		{"id": 656, "name": "Froakie", "types": [2], "picture": "https://static.wikia.nocookie.net/nintendo/images/8/8e/Froakie.png/revision/latest/scale-to-width-down/120?cb=20130116015637&path-prefix=en"},
+		{"id": 722, "name": "Rowlet", "types": [3, 9], "picture": "https://static.wikia.nocookie.net/nintendo/images/f/ff/Rowlet.png/revision/latest/scale-to-width-down/120?cb=20160510165702&path-prefix=en"},
+		{"id": 725, "name": "Litten", "types": [1], "picture": "https://static.wikia.nocookie.net/nintendo/images/6/6e/Litten.png/revision/latest/scale-to-width-down/120?cb=20160510165731&path-prefix=en"},
+		{"id": 728, "name": "Popplio", "types": [2], "picture": "https://static.wikia.nocookie.net/nintendo/images/4/41/Popplio.png/revision/latest/scale-to-width-down/120?cb=20160510165740&path-prefix=en"},
+		{"id": 810, "name": "Grookey", "types": [3], "picture": "https://static.wikia.nocookie.net/nintendo/images/7/7a/Grookey.png/revision/latest/scale-to-width-down/120?cb=20190301012605&path-prefix=en"},
+		{"id": 813, "name": "Scorbunny", "types": [1], "picture": "https://static.wikia.nocookie.net/nintendo/images/c/cc/Scorbunny.png/revision/latest/scale-to-width-down/120?cb=20190301012630&path-prefix=en"},
+		{"id": 816, "name": "Sobble", "types": [2], "picture": "https://static.wikia.nocookie.net/nintendo/images/0/0c/Sobble.png/revision/latest/scale-to-width-down/120?cb=20190301012648&path-prefix=en"}
+    ]
+}
